@@ -1,0 +1,87 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+       
+       
+
+	<routeContext id="orderExecutionRoute" xmlns="http://camel.apache.org/schema/spring">
+	
+		<route id="processOrderTransformation">
+			<from uri="direct:orderservice-processOrder-TR" />
+			<log message="inside processOrder execution route" />
+			<to uri="direct:processOrder-ER" />
+		</route>
+		
+		<route id="processOrderExecutionRoute">
+			<from uri="direct:processOrder-ER" />
+			<log message="inside processOrder executionroute before calling feature execution" />
+			<to uri="bean:executionFeatureDynamic?method=route" />
+			<log message="value of Impl route : ${in.header.implroute}"/>
+			<toD uri="direct:${in.header.implroute}"/>
+			<log message="inside processOrder executionroute after calling feature execution" />
+		</route>
+		
+		<route id="orderNoteTransformation">
+			<from uri="direct:orderservice-addOrderNote-TR" />
+			<log message="inside orderservice execution route" />
+			<to uri="direct:addOrderNote-ER" />
+		</route>
+		
+		<route id="orderNoteExecutionRoute">
+			<from uri="direct:addOrderNote-ER" />
+			<log message="inside addOrderLine executionroute before calling feature execution" />
+			<to uri="bean:executionFeatureDynamic?method=route" />
+			<log message="value of Impl route : ${in.header.implroute}"/>
+			<toD uri="direct:${in.header.implroute}"/>
+			<log message="inside addOrderNote executionroute after calling feature execution" />
+		</route>
+		
+		<route id="orderLineTransformation">
+			<from uri="direct:orderservice-addOrderLine-TR" />
+			<log message="inside orderservice execution route" />
+			<to uri="direct:addOrderLine-ER" />
+		</route>
+		
+		<route id="orderLineExecutionRoute">
+			<from uri="direct:addOrderLine-ER" />
+			<log message="inside addOrderLine executionroute before calling feature execution" />
+			<to uri="bean:executionFeatureDynamic?method=route" />
+			<log message="value of Impl route : ${in.header.implroute}"/>
+			<toD uri="direct:${in.header.implroute}"/>
+			<log message="inside addOrderLine executionroute after calling feature execution" />
+		</route>
+		
+		<route id="addAddressMasterTransformation">
+			<from uri="direct:orderservice-addAddressMaster-TR" />
+			<log message="inside addAddressMaster execution route" />
+			<to uri="direct:addAddressMaster-ER" />
+		</route>
+		
+		<route id="addAddressMasterExecutionRoute">
+			<from uri="direct:addAddressMaster-ER" />
+			<log message="inside addAddressMaster executionroute before calling feature execution" />
+			<to uri="bean:executionFeatureDynamic?method=route" />
+			<log message="value of Impl route : ${in.header.implroute}"/>
+			<toD uri="direct:${in.header.implroute}"/>
+			<log message="inside addAddressMaster executionroute after calling feature execution" />
+		</route>
+		
+		<route id="orderDetailsTransformation">
+			<from uri="direct:orderservice-addOrderDetails-TR" />
+			<log message="inside orderDetails execution route" />
+			<to uri="direct:addOrderDetails-ER" />
+		</route>
+		
+		<route id="orderDetailsExecutionRoute">
+			<from uri="direct:addOrderDetails-ER" />
+			<log message="inside addOrderDetails executionroute before calling feature execution" />
+			<to uri="bean:executionFeatureDynamic?method=route" />
+			<log message="value of Impl route : ${in.header.implroute}"/>
+			<toD uri="direct:${in.header.implroute}"/>
+			<log message="inside addOrderDetails executionroute after calling feature execution" />
+		</route>
+		
+	</routeContext>
+</beans>

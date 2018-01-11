@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EventFramework xmlns:dis="http://attunedlabs.com/internalevents/Dispatcher"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="eventframework.xsd">
+
+	<EventSubscription>
+
+		<SubscribeEvent subscriptionId="Orders_Subscriber"
+			isEnabled="true" retryCount="6" retry="false">
+			<SubscribeTo>bulkload</SubscribeTo>
+			<EventSubscriptionCriteria>eventId == "Orders_Details"</EventSubscriptionCriteria>
+			<EventRoutingRules>
+				<EventRoutingRule>
+					<InvokeCamelRoute>direct:processOrder-vend-IR</InvokeCamelRoute>
+				</EventRoutingRule>
+			</EventRoutingRules>
+		</SubscribeEvent>
+
+	</EventSubscription>
+
+</EventFramework>

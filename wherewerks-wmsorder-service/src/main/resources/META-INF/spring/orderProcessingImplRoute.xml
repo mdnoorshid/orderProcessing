@@ -1,0 +1,120 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<bean id="order" class="com.wherewerks.wmsorder.bean.OrderProcessingBean" />
+	<bean id="errorhandler" class="com.wherewerks.retry.bean.FailedMessageRetryBean"></bean>
+	<bean id="converter" class="com.wherewerks.util.Utility"></bean>
+
+	<routeContext id="orderImplRoute" xmlns="http://camel.apache.org/schema/spring">
+
+		<route id="processOrderServiceImplemantation">
+			<from uri="direct:processOrder-vend-IR" />
+			<log message="Exchange Body in processOrderServiceImplementation : ${body}" />
+			<setHeader headerName="messageBody">
+				<simple>${body}</simple>
+			</setHeader>
+			<setHeader headerName="policyId">
+				<constant>Policy_4</constant>
+			</setHeader>
+			<!-- <to uri="bean:order?method=setConnection" /> -->
+			
+			<to uri="direct:addOrderDetails-vend-IR" />
+			<to uri="direct:addOrderNote-vend-IR" />
+			<to uri="direct:addAddressMaster-vend-IR" />
+			<to uri="direct:addOrderLine-vend-IR" />
+			<to uri="direct:mock" />
+		</route>
+
+		<route id="mock">
+			<from uri="direct:mock" />
+			<log message="body should be printed : ${body}" />
+		</route>
+
+		<route id="orderNoteServiceImplemantation">
+			<from uri="direct:addOrderNote-vend-IR" />
+			<log message="ORDER_NOTE_SEG : ${body}" />
+			<to uri="bean:order?method=addOrderNote" />
+			<!-- <onException>
+				<exception>java.lang.Exception</exception>
+				<handled>
+					<constant>true</constant>
+				</handled>
+				<continued><constant>true</constant></continued>
+				<log message="Exchange Body on Exception : ${body}" />
+				<to uri="bean:errorhandler?method=processFailedMessage" />
+				<log message="log has : ${body}" />
+				<to uri="direct:pollingBean" />
+			</onException> -->
+		</route>
+
+		<route id="orderLineServiceImplemantation">
+			<from uri="direct:addOrderLine-vend-IR" />
+			<log message="ORDER_LINE_SEG : ${body}" />
+			<to uri="bean:order?method=addOrderLine" />
+			<!-- <onException>
+				<exception>java.lang.Exception</exception>
+				<handled>
+					<constant>true</constant>
+				</handled>
+				<continued><constant>true</constant></continued>
+				<log message="Exchange Body on Exception : ${body}" />
+				<to uri="bean:errorhandler?method=processFailedMessage" />
+				<log message="log has : ${body}" />
+				<to uri="direct:pollingBean" />
+			</onException> -->
+		</route>
+
+		<route id="addressMasterServiceImplementation">
+			<from uri="direct:addAddressMaster-vend-IR" />
+			<log message="CTRL_SEG : ${body}" />
+			<to uri="bean:order?method=addAddressMaster" />
+			<!-- <onException>
+				<exception>java.lang.Exception</exception>
+				<handled>
+					<constant>true</constant>
+				</handled>
+				<continued><constant>true</constant></continued>
+				<log message="Exchange Body on Exception : ${body}" />
+				<to uri="bean:errorhandler?method=processFailedMessage" />
+				<log message="log has : ${body}" />
+				<to uri="direct:pollingBean" />
+			</onException> -->
+		</route>
+
+		<route id="orderDetailsServiceImplemantation">
+			<from uri="direct:addOrderDetails-vend-IR" />
+			<log message="exchange body has : ${body}" />
+			<!-- <setHeader headerName="orderNumber">
+				<xpath resultType="java.lang.String">/ORDER_INB_IFD/CTRL_SEG/ORDER_SEG/ORDER_NOTE_SEG/ORDNUM
+				</xpath>
+			</setHeader>
+			<log message="CTRL_SEG : ${body}" /> -->
+			<to uri="bean:order?method=addOrderDetails" />
+			<!-- <onException>
+				<exception>java.lang.Exception</exception>
+				<handled>
+					<constant>true</constant>
+				</handled>
+				<continued><constant>true</constant></continued>
+				<log message="Exchange Body on Exception : ${body}" />
+				<to uri="bean:errorhandler?method=processFailedMessage" />
+				<log message="log has : ${body}" />
+				<to uri="direct:pollingBean" />
+			</onException> -->
+		</route>
+
+		<!-- <route>
+			<from uri="timer://foo?period=40000" />
+			<setHeader headerName="policyId">
+				<constant>Policy_4</constant>
+			</setHeader>
+			<to uri="bean:errorhandler?method=getFailedMessage" />
+			<log message="data to call service : ${in.header.dataExists}" />
+			<log message="data to call service : ${in.header.orderNumber}" />
+		</route> -->
+
+	</routeContext>
+</beans>

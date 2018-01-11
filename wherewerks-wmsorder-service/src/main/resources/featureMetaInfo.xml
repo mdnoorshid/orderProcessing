@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Feature-Metainfo productVersion="WMS2.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="featureMetaInfo.xsd"
+	xmlns:fms="http://attunedlabs.com/internal/FeatureMetaInfoSupporting">
+	<FeatureGroup>
+		<Name>orders</Name>
+
+		<Features>
+			<Feature vendorName="wherewerks" vendorVersion="1.0"
+				implementationName="wworderservice">
+				<Name>orderservice</Name>
+
+				<fms:EventResources>
+					<fms:EventResource resourceName="order-eventing.xml"/>
+				</fms:EventResources>
+
+				<FeatureImplementations>
+					<FeatureImplementation resourceName="wmsorder-featureservice.xml" />
+				</FeatureImplementations>
+				
+			</Feature>
+		</Features>
+	</FeatureGroup>
+</Feature-Metainfo>
