@@ -30,6 +30,9 @@ public class OrderNote {
 		this.ins_user_id = ins_user_id;
 		this.last_upd_user_id = last_upd_user_id;
 	}
+	public OrderNote(){
+		
+	}
 	public String getClient_id() {
 		return client_id;
 	}

@@ -162,6 +162,7 @@ public class Utility extends AbstractLeapCamelBean {
 		try {
 			exchangeJson = new JSONObject(exchangeBody);
 			exchangeXml = XML.toString(exchangeJson);
+			exchangeXml="<data>"+exchangeXml+"</data>";
 		} catch (JSONException e) {
 			throw new UtilityException("Unable to transform the body from json format to xml format", e);
 		}

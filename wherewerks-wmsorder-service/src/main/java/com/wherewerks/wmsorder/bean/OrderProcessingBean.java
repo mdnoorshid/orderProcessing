@@ -15,6 +15,7 @@ import org.apache.metamodel.schema.Table;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.XML;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,17 +51,15 @@ public class OrderProcessingBean extends AbstractMetaModelBean {
 	 */
 	public void addOrderDetails(Exchange exchange)
 			throws OrderProcessingException, UtilityException, OrderProcessingDaoException, SQLException {
-		logger.debug("inside addOrderDetails methodl......");
+		logger.debug("inside addOrderDetails method......");
 		String bodyInRequestStr = exchange.getIn().getBody(String.class);
 		logger.debug("bodyInRequestStr:: " + bodyInRequestStr);
 		OrderProcessingDao orderProcessingDao = new OrderProcessingDao();
 		OrderDetails orderDetails = new OrderDetails();
-		int id = 0;
-		int response = 0;
 		JSONObject jsonObjectBody = null;
 
-		try {
-			jsonObjectBody = new JSONObject(bodyInRequestStr);
+			try {
+				jsonObjectBody = XML.toJSONObject(bodyInRequestStr);
 			logger.debug("jsonObjectBody::: " + jsonObjectBody);
 			String clientId = jsonObjectBody.getJSONObject(EVENT_PARAM).getString(CLIENT_ID);
 			String ordnum = jsonObjectBody.getJSONObject(EVENT_PARAM).getJSONObject(ORDER_SEG)
@@ -105,10 +104,9 @@ public class OrderProcessingBean extends AbstractMetaModelBean {
 		
 			orderProcessingDao.addOrderDetails(orderDetails);
 			logger.debug("Insertion done for order detail: "+orderDetails);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new OrderProcessingException("There is an exception", e);
-		}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	}
 
 	/**
@@ -137,35 +135,28 @@ public class OrderProcessingBean extends AbstractMetaModelBean {
 		JSONArray orderLineSeg;
 		JSONObject singleOrderLine = new JSONObject();
 		try {
-			jsonBody = new JSONObject(body);
+			jsonBody = XML.toJSONObject(body);
 			logger.debug("jsonBody : " + jsonBody);
-			jsonObjectBody = jsonBody.getJSONObject(EVENT_PARAM);
-			logger.debug("jsonObjectBody : " + jsonObjectBody);
-			orderSeg = jsonObjectBody.getJSONObject(OrderConstants.ORDER_SEG);
-			logger.debug("orderSeg : " + orderSeg);
-			if (orderSeg.has(OrderConstants.ORDER_LINE_SEG)) {
-				orderLineSeg = orderSeg.getJSONArray(OrderConstants.ORDER_LINE_SEG);
-				logger.debug("orderLineSeg : " + orderLineSeg);
-				for (int i = 0; i < orderLineSeg.length(); i++) {
-					singleOrderLine = orderLineSeg.getJSONObject(i);
-					logger.debug("singleOrderLine : " + singleOrderLine);
-					orderLine.setSEGNAM(singleOrderLine.getString(OrderConstants.SEGNAM));
-					orderLine.setORDNUM(singleOrderLine.getString(OrderConstants.ORDNUM));
-					orderLine.setORDLIN(singleOrderLine.getString(OrderConstants.ORDLIN));
-					orderLine.setORDSLN(singleOrderLine.getString(OrderConstants.ORDSLN));
-					orderLine.setINVSTS_PRG(singleOrderLine.getString(OrderConstants.INVSTS_PRG));
-					orderLine.setSALES_ORDNUM(singleOrderLine.getString(OrderConstants.SALES_ORDNUM));
-					orderLine.setENTDTE(singleOrderLine.getString(OrderConstants.ENTDTE));
-					orderLine.setPRTNUM(singleOrderLine.getString(OrderConstants.PRTNUM));
-					orderLine.setCSTPRT(singleOrderLine.getString(OrderConstants.CSTPRT));
-					orderLine.setEARLY_SHPDTE(singleOrderLine.getString(OrderConstants.EARLY_SHPDTE));
-					orderLine.setEARLY_DLVDTE(singleOrderLine.getString(OrderConstants.EARLY_DLVDTE));
-					orderLine.setLATE_SHPDTE(singleOrderLine.getString(OrderConstants.LATE_SHPDTE));
-					orderLine.setLATE_DLVDTE(singleOrderLine.getString(OrderConstants.LATE_DLVDTE));
-					orderLine.setACCNUM(singleOrderLine.getString(OrderConstants.ACCNUM));
-					orderLine.setPCKQTY(singleOrderLine.getInt(OrderConstants.PCKQTY));
-					orderLine.setHOST_ORDQTY(singleOrderLine.getInt(OrderConstants.HOST_ORDQTY));
-					orderLine.setUNT_PRICE(singleOrderLine.getInt(OrderConstants.UNT_PRICE));
+			/*jsonObjectBody = jsonBody.getJSONObject(EVENT_PARAM);
+			logger.debug("jsonObjectBody : " + jsonObjectBody);*/
+			//orderSeg = jsonObjectBody.getJSONObject(OrderConstants.ORDER_SEG);
+					orderLine.setSEGNAM(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.SEGNAM));
+					orderLine.setORDNUM(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.ORDNUM));
+					orderLine.setORDLIN(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.ORDLIN));
+					orderLine.setORDSLN(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.ORDSLN));
+					orderLine.setINVSTS_PRG(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.INVSTS_PRG));
+					orderLine.setSALES_ORDNUM(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.SALES_ORDNUM));
+					orderLine.setENTDTE(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.ENTDTE));
+					orderLine.setPRTNUM(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.PRTNUM));
+					orderLine.setCSTPRT(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.CSTPRT));
+					orderLine.setEARLY_SHPDTE(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.EARLY_SHPDTE));
+					orderLine.setEARLY_DLVDTE(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.EARLY_DLVDTE));
+					orderLine.setLATE_SHPDTE(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.LATE_SHPDTE));
+					orderLine.setLATE_DLVDTE(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.LATE_DLVDTE));
+					orderLine.setACCNUM(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.ACCNUM));
+					orderLine.setPCKQTY(jsonBody.getJSONObject(ORDER_LINE_SEG).getInt(OrderConstants.PCKQTY));
+					orderLine.setHOST_ORDQTY(jsonBody.getJSONObject(ORDER_LINE_SEG).getInt(OrderConstants.HOST_ORDQTY));
+					orderLine.setUNT_PRICE(jsonBody.getJSONObject(ORDER_LINE_SEG).getInt(OrderConstants.UNT_PRICE));
 					// orderLine.setUC_IDCEDIUSERFIELD1(singleOrderLine.getString(OrderConstants.UC_IDCEDIUSERFIELD1));
 					// logger.debug("singleOrderLine.getString(OrderConstants.UC_IDCEDIUSERFIELD1)
 					// : " +
@@ -186,9 +177,9 @@ public class OrderProcessingBean extends AbstractMetaModelBean {
 					// logger.debug("singleOrderLine.getString(OrderConstants.UC_IDCEDIUSERFIELD5)
 					// : " +
 					// singleOrderLine.getString(OrderConstants.UC_IDCEDIUSERFIELD5));
-					orderLine.setORDQTY(singleOrderLine.getInt(OrderConstants.ORDQTY));
+					orderLine.setORDQTY(jsonBody.getJSONObject(ORDER_LINE_SEG).getInt(ORDQTY));
 					logger.debug("singleOrderLine.getString(OrderConstants.ORDQTY) : "
-							+ singleOrderLine.getString(OrderConstants.ORDQTY));
+							+ jsonBody.getJSONObject(ORDER_LINE_SEG).getInt(ORDQTY));
 					// orderLine.setUC_USERDEF5(singleOrderLine.getString(OrderConstants.UC_USERDEF5));
 					// logger.debug("singleOrderLine.getString(OrderConstants.UC_USERDEF5)
 					// : " +
@@ -212,13 +203,11 @@ public class OrderProcessingBean extends AbstractMetaModelBean {
 					// orderLine.setINVSTS(singleOrderLine.getString(OrderConstants.INVSTS));
 					// logger.debug("singleOrderLine.getString(OrderConstants.INVSTS)
 					// : " + singleOrderLine.getString(OrderConstants.INVSTS));
-					orderLine.setENTDTE(singleOrderLine.getString(OrderConstants.ENTDTE));
-					logger.debug("singleOrderLine.getString(OrderConstants.ENTDTE) : "
-							+ singleOrderLine.getString(OrderConstants.ENTDTE));
+					orderLine.setENTDTE(jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.ENTDTE));
+					logger.debug("jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.ENTDTE) : "
+							+ jsonBody.getJSONObject(ORDER_LINE_SEG).getString(OrderConstants.ENTDTE));
 
 					orderProcessDao.addOrderLine(orderLine);
-				}
-			}
 		} catch (JSONException | SQLException | IOException e) {
 			throw new OrderProcessingException("Unable to get the required Order Line value form the JSON Object", e);
 		}
@@ -244,22 +233,21 @@ public class OrderProcessingBean extends AbstractMetaModelBean {
 		logger.debug("inside last_upd_user_id method.....");
 		String requestBody = exchange.getIn().getBody(String.class);
 		logger.debug("requestBody:: " + requestBody);
-		OrderNote orderNote = null;
+		OrderNote orderNote = new OrderNote();
 		OrderProcessingDao orderProcessingDao = new OrderProcessingDao();
 		try {
-			JSONObject requestJsonObj = new JSONObject(requestBody);
+			JSONObject requestJsonObj =XML.toJSONObject(requestBody);
 			logger.debug("requestJsonObj:: " + requestJsonObj);
 
-			JSONArray Order_Note_Segment = requestJsonObj.getJSONObject(EVENT_PARAM).getJSONObject(ORDER_SEG)
+			/*JSONArray Order_Note_Segment = requestJsonObj.getJSONObject(EVENT_PARAM).getJSONObject(ORDER_SEG)
 					.getJSONArray(ORDER_NOTE_SEG);
 			logger.debug("Order_Note_Segment:: " + Order_Note_Segment);
 
 			String client_id = requestJsonObj.getJSONObject(EVENT_PARAM).getString(CLIENT_ID);
-			logger.debug("clientId:: " + client_id);
+			logger.debug("clientId:: " + client_id);*/
 			String wh_id = "NA";
-			int edtflg = 0;
-			double u_version = requestJsonObj.getJSONObject(EVENT_PARAM).getDouble(TRNVER);
-			logger.debug("u_version:: " + u_version);
+			/*double u_version = requestJsonObj.getJSONObject(EVENT_PARAM).getDouble(TRNVER);
+			logger.debug("u_version:: " + u_version);*/
 			Date ins_dt = null;
 			Date last_upd_dt = null;
 			String ins_user_id = "NA";
@@ -269,19 +257,28 @@ public class OrderProcessingBean extends AbstractMetaModelBean {
 			String nottyp = null;
 			String nottxt = null;
 			String ordnum = null;
-			for (int i = 0; i < Order_Note_Segment.length(); i++) {
-				notlin = Order_Note_Segment.getJSONObject(i).getString(NOTLIN);
-				nottyp = Order_Note_Segment.getJSONObject(i).getString(NOTTYP);
-				nottxt = Order_Note_Segment.getJSONObject(i).getString(NOTTXT);
-				ordnum = Order_Note_Segment.getJSONObject(i).getString(ORDNUM);
-				orderNote = new OrderNote(client_id, ordnum, nottyp, notlin, wh_id, nottxt, edtflg, u_version, ins_dt,
-						last_upd_dt, ins_user_id, last_upd_user_id);
+			notlin = requestJsonObj.getJSONObject(ORDER_NOTE_SEG).getString(NOTLIN);
+				/*nottyp = Order_Note_Segment.getJSONObject(i).getString(NOTTYP);*/
+			logger.debug("notlin:: "+notlin);
+			nottyp =  requestJsonObj.getJSONObject(ORDER_NOTE_SEG).getString(NOTTYP);
+				/*nottxt = Order_Note_Segment.getJSONObject(i).getString(NOTTXT);*/
+			logger.debug("nottyp:: "+nottyp);
+			nottxt = requestJsonObj.getJSONObject(ORDER_NOTE_SEG).getString(NOTTXT);
+				/*ordnum = Order_Note_Segment.getJSONObject(i).getString(ORDNUM);*/
+			logger.debug("nottyp:: "+nottyp);
+			ordnum = requestJsonObj.getJSONObject(ORDER_NOTE_SEG).getString(ORDNUM);
+			logger.debug("ordnum:: "+ordnum);
+			orderNote.setNotlin(notlin);
+			orderNote.setNottyp(nottyp);
+			orderNote.setNottxt(nottxt);
+			orderNote.setOrdnum(ordnum);
+			orderNote.setClient_id("");
+			orderNote.setWh_id("");
 				orderProcessingDao.addOrderNote(orderNote);
 				logger.debug("Insertion done for:: " + orderNote);
-			}
 
 		} catch (JSONException e) {
-			throw new OrderProcessingException("Unable to get the required Order note value form the JSON Object", e);
+			throw new OrderProcessingException("Unable to get the required Order Line value form the JSON Object", e);
 		}
 	}
 
@@ -306,7 +303,7 @@ public class OrderProcessingBean extends AbstractMetaModelBean {
 		JSONObject jsonObjectBody = null;
 		JSONObject jsonBody = null;
 		try {
-			jsonBody = new JSONObject(body);
+			jsonBody = XML.toJSONObject(body);
 			logger.debug("jsonBody : " + jsonBody);
 			jsonObjectBody = jsonBody.getJSONObject(EVENT_PARAM);
 			JSONObject orderSeg = jsonObjectBody.getJSONObject(OrderConstants.ORDER_SEG);
@@ -328,11 +325,8 @@ public class OrderProcessingBean extends AbstractMetaModelBean {
 			orderAdd.setFAXNUM(routetoAddrSeg.getString(OrderConstants.FAXNUM));
 			orderAdd.setFAXNUM(routetoAddrSeg.getString(OrderConstants.PHNNUM));
 
-			/* response = */ orderProcessDao.addAddressMaster(orderAdd);
-			// }
-			// }
+		orderProcessDao.addAddressMaster(orderAdd);
 		} catch (JSONException | SQLException | IOException e) {
-			e.printStackTrace();
 			throw new OrderProcessingException("Unable to get the required Order Address value form the JSON Object",
 					e);
 		}

@@ -13,6 +13,23 @@
 		<route id="processOrderServiceImplemantation">
 			<from uri="direct:processOrder-vend-IR" />
 			<log message="Exchange Body in processOrderServiceImplementation : ${body}" />
+			<to uri="bean:converter?method=xmlToJson" />
+			<split>
+            	<xpath>/data/eventParam</xpath>
+            	<to uri="direct:addOrderDetails-vend-IR"/>
+        	</split>
+        	<split>
+            	<xpath>/data/eventParam/OrderSegment/Order_Note_Segment</xpath>
+            	<to uri="direct:addOrderNote-vend-IR"/>
+        	</split>
+        	<split>
+            	<xpath>/data/eventParam/OrderSegment/Order_Line_Segment</xpath>
+            	<to uri="direct:addOrderLine-vend-IR"/>
+        	</split>
+        	<split>
+            	<xpath>/data/eventParam</xpath>
+            	<to uri="direct:addAddressMaster-vend-IR"/>
+        	</split>
 			<setHeader headerName="messageBody">
 				<simple>${body}</simple>
 			</setHeader>
@@ -21,10 +38,10 @@
 			</setHeader>
 			<!-- <to uri="bean:order?method=setConnection" /> -->
 			
-			<to uri="direct:addOrderDetails-vend-IR" />
+	<!-- 		<to uri="direct:addOrderDetails-vend-IR" />
 			<to uri="direct:addOrderNote-vend-IR" />
 			<to uri="direct:addAddressMaster-vend-IR" />
-			<to uri="direct:addOrderLine-vend-IR" />
+			<to uri="direct:addOrderLine-vend-IR" /> -->
 			<to uri="direct:mock" />
 		</route>
 
