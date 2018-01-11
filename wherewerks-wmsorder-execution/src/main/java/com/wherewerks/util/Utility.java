@@ -156,6 +156,7 @@ public class Utility extends AbstractLeapCamelBean {
 	 * @throws UtilityException
 	 */
 	public void xmlToJson(Exchange exchange) throws UtilityException {
+		logger.debug("inside xmlToJson.....");
 		String exchangeBody = exchange.getIn().getBody(String.class);
 		JSONObject exchangeJson = null;
 		String exchangeXml = null;
@@ -165,6 +166,7 @@ public class Utility extends AbstractLeapCamelBean {
 		} catch (JSONException e) {
 			throw new UtilityException("Unable to transform the body to the desired format", e);
 		}
+		logger.debug("final xml body:: "+exchangeXml);
 		exchange.getIn().setBody(exchangeXml);
 	}
 

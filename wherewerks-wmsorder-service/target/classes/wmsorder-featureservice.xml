@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FeaturesServiceInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="featureService.xsd">
+<Features featureGroup="orders">
+		<Feature featureName="orderservice" version="1.0" enabled='true' interfaceName="com.attunedlabs.IPrintService">
+		
+			<Service name="processOrder" enabled='true' vendorName="wherewerks" Description="" >
+				<GenericRestEndpoint httpMethod="POST">processOrder-vend-IR</GenericRestEndpoint>
+			</Service>
+			
+			<Service name="addOrderNote" enabled='true' vendorName="wherewerks" Description="" >
+				<GenericRestEndpoint httpMethod="POST">addOrderNote-vend-IR</GenericRestEndpoint>
+			</Service>
+			
+			<Service name="addOrderLine" enabled='true' vendorName="wherewerks" Description="" >
+				<GenericRestEndpoint httpMethod="POST">addOrderLine-vend-IR</GenericRestEndpoint>
+			</Service>
+			
+			<Service name="addAddressMaster" enabled='true' vendorName="wherewerks" Description="" >
+				<GenericRestEndpoint httpMethod="POST">addAddressMaster-vend-IR</GenericRestEndpoint>
+			</Service>
+			
+			<Service name="addOrderDetails" enabled='true' vendorName="wherewerks" Description="" >
+				<GenericRestEndpoint httpMethod="POST">addOrderDetails-vend-IR</GenericRestEndpoint>
+			</Service>
+			
+		</Feature>
+	</Features>
+</FeaturesServiceInfo>

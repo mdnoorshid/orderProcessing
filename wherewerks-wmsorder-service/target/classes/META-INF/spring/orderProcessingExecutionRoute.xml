@@ -4,31 +4,14 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
        
-    <bean id="converter" class="com.wherewerks.util.Utility"></bean>
+       
 
 	<routeContext id="orderExecutionRoute" xmlns="http://camel.apache.org/schema/spring">
 	
 		<route id="processOrderTransformation">
 			<from uri="direct:orderservice-processOrder-TR" />
-			<to uri="bean:converter?method=xmlToJson" />
-			<split>
-            	<xpath>/ORDER_INB_IFD/CTRL_SEG</xpath>
-            	<to uri="direct:orderservice-addOrderDetails-TR"/>
-        	</split>
-        	<split>
-            	<xpath>/ORDER_INB_IFD/CTRL_SEG/ORDER_SEG/ORDER_NOTE_SEG</xpath>
-            	<to uri="direct:orderservice-addOrderNote-TR"/>
-        	</split>
-        	<split>
-            	<xpath>/ORDER_INB_IFD/CTRL_SEG/ORDER_SEG/ORDER_LINE_SEG</xpath>
-            	<to uri="direct:orderservice-addOrderLine-TR"/>
-        	</split>
-        	<split>
-            	<xpath>/ORDER_INB_IFD/CTRL_SEG</xpath>
-            	<to uri="direct:orderservice-addAddressMaster-TR"/>
-        	</split>
 			<log message="inside processOrder execution route" />
-			<!-- <to uri="direct:processOrder-ER" /> -->
+			<to uri="direct:processOrder-ER" />
 		</route>
 		
 		<route id="processOrderExecutionRoute">

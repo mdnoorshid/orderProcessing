@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FeatureDataContext xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="featureDataContext.xsd">
+	<DataContexts contextName="transformer-DataContext">
+		<DataContext dbBeanRefName="dataSourceA" dbType="mysql" dbHost="localhost" dbPort="3306" dbSchema="getusroi"/>					
+	</DataContexts>
+</FeatureDataContext>

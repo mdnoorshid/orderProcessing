@@ -1,0 +1,454 @@
+{
+	"ORDER_INB_IFD": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Order_INB_IFD"
+		}]
+	},
+	"CTRL_SEG": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "ControlSegment"
+		}]
+	},
+	"TRNNAM": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "TransactionNumber"
+		}]
+	},
+	"TRNVER": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "TransactionVersion"
+		}]
+	},
+	"WHSE_ID": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "SiteId"
+		}]
+	},
+	"CLIENT_ID": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "ClientId"
+		}]
+	},
+	"ORDER_SEG": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "OrderSegment"
+		}]
+	},
+	"SEGNAM": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "SegmentName"
+		}]
+	},
+	"TRNTYP": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "TransactionType"
+		}]
+	},
+	"STCUST": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "STCustomer"
+		}]
+	},
+	"RTCUST": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "RTCustomer"
+		}]
+	},
+	"BTCUST": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "BTCustomer"
+		}]
+	},
+	"CPONUM": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "CPONumber"
+		}]
+	},
+	"CPODAT": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "CPOData"
+		}]
+	},
+	"CPOTYP": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "CPOType"
+		}]
+	},
+	"WAVE_FLG": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Wave_Flag"
+		}]
+	},
+	"ORDNUM": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "OrderNumber"
+		}]
+	},
+	"ENTDTE": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "EntryDate"
+		}]
+	},
+	"ORDTYP": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "OrderType"
+		}]
+	},
+	"UC_HSTORD": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_HostOrder"
+		}]
+	},
+	"DEPTNO": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "DepartmentNumber"
+		}]
+	},
+	"UC_IDCDEPTDESC": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_IDCDepartmentDesc"
+		}]
+	},
+	"UC_STOREID": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_StoreId"
+		}]
+	},
+	"UC_EDIUSERFIELD1": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_EDIUserField1"
+		}]
+	},
+	"UC_DEPTNO": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_DepartmentNumber"
+		}]
+	},
+	"UC_RTCODE": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_RouteCode"
+		}]
+	},
+	"UC_STCODE": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_StateCode"
+		}]
+	},
+	"UC_USERDEF2": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_UserDef2"
+		}]
+	},
+	"UC_USERDEF3": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_UserDef3"
+		}]
+	},
+	"UC_SMLFRTTRM": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_SMLFRTTRM"
+		}]
+	},
+	"UC_LTLFRTTRM": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_LTLFRTTRM"
+		}]
+	},
+	"UC_CONSOLIDATE": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_Consolidate"
+		}]
+	},
+
+	"ORDER_NOTE_SEG": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Order_Note_Segment"
+		}]
+	},
+	"NOTLIN": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "NoteLine"
+		}]
+	},
+	"NOTTYP": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "NoteType"
+		}]
+	},
+	"NOTTXT": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "NoteText"
+		}]
+	},
+
+	"ORDER_LINE_SEG": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Order_Line_Segment"
+		}]
+	},
+	"ORDLIN": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Order_Line"
+		}]
+	},
+	"ORDSLN": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Order_SLN"
+		}]
+	},
+	"INVSTS_PRG": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Invests_PRG"
+		}]
+	},
+	"INVSTS": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Invests"
+		}]
+	},
+	"SALES_ORDNUM": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Sales_OrderNumber"
+		}]
+	},
+
+	"PRTNUM": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Part_Number"
+		}]
+	},
+	"CSTPRT": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "CST_Part"
+		}]
+	},
+	"EARLY_SHPDTE": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Early_ShipDate"
+		}]
+	},
+	"EARLY_DLVDTE": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Early_DeliveryDate"
+		}]
+	},
+	"LATE_SHPDTE": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Late_ShipDate"
+		}]
+	},
+	"LATE_DLVDTE": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Late_DeliveryDate"
+		}]
+	},
+
+	"ACCNUM": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "AccountNumber"
+		}]
+	},
+	"PCKQTY": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "PackingQuantity"
+		}]
+	},
+	"ORDQTY": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "OrderQuantity"
+		}]
+	},
+	"HOST_ORDQTY": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Host_OrderQuantity"
+		}]
+	},
+	"UNT_PRICE": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Unit_Price"
+		}]
+	},
+	"UC_USERDEF1": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_UserDef1"
+		}]
+	},
+
+	"UC_USERDEF5": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_UserDef5"
+		}]
+	},
+	"UC_USERDEF6": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_UserDef6"
+		}]
+	},
+	"UC_IDCEDIUSERFIELD1": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_IDCEDIUserField1"
+		}]
+	},
+	"UC_IDCEDIUSERFIELD2": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_IDCEDIUserField2"
+		}]
+	},
+	"UC_IDCEDIUSERFIELD3": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_IDCEDIUserField3"
+		}]
+	},
+	"UC_IDCEDIUSERFIELD4": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_IDCEDIUserField4"
+		}]
+	},
+
+	"UC_IDCEDIUSERFIELD5": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_IDCEDIUserField5"
+		}]
+	},
+	"UC_IDCLABELINFOSUPP": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "UC_IDCLabelInfoSupp"
+		}]
+	},
+
+	"ROUTETO_ADDR_SEG": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "RouteTo_Address_Segment"
+		}]
+	},
+	"ADRNAM": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "AddressName"
+		}]
+	},
+	"ADRLN1": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "AddressLine1"
+		}]
+	},
+	"ADRLN2": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "AddressLine2"
+		}]
+	},
+
+	"ATTN_NAME": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Attendent_Name"
+		}]
+	},
+	"ADRCTY": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "AddressCity"
+		}]
+	},
+	"CTRY_NAME": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "Country_Name"
+		}]
+	},
+	"FAXNUM": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "FaxNumber"
+		}]
+	},
+	"PHNNUM": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "PhoneNumber"
+		}]
+	},
+	"ADRPSZ": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "AddressPostalCode"
+		}]
+	},
+	"ADRSTC": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "AddressState"
+		}]
+	},
+	"SHIPTO_ADDR_SEG": {
+		"mapping": [{
+			"type": "string",
+			"eventmappingfiled": "ShipTo_Address_Segment"
+		}]
+	}
+}
